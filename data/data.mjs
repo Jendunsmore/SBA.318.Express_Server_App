@@ -17,3 +17,5 @@ let scores = [
     {id: 1, playerName: 'Dracula', score: 5},
     {id: 2, playerName: 'Brains', score: 3},
 ];
+
+export default costumes; triviaQuestions; scores;
