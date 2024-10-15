@@ -42,9 +42,15 @@ app.use(maintenanceMode);
 
 
 // Body parser- form submission
-app.use(express.urlendcoded({ extended: true}));
+app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
 // template engine
 app.set('view engine', 'file');
 app.set('views', './views');
+
+
+// Listener
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

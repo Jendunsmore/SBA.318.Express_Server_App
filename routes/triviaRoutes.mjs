@@ -1,7 +1,7 @@
 // GET all trivia questions
-app.get{'/api/trivia', (req, res) => {
+app.get('/api/trivia', (req, res) => {
     res.json(triviaQuestions);
-}};
+});
 
 // GET trivia by difficulty (query parameters)
 app.get('api/trivia/filter', (req, res) => {
@@ -18,6 +18,7 @@ app.post('/api/trivia', (req, res) => {
         answer: req.body.answer,
         difficulty: req.body.difficulty
     };
+    console.log(newQuestion)
     triviaQuestions.push(newQuestion);
     res.status(201).json(newQuestion);
 });
@@ -32,4 +33,3 @@ app.delete('/api/trivia/:id', (req, res) => {
         res.status(404).send('Trivia question not found');
     }
 });
-
