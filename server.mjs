@@ -45,7 +45,7 @@ app.engine('file', (filepath, options, callback) => {
     fs.readFile(filePath, (err, content) => {
         if (err) return callback(err);
 
-        // Check if rendering all soctumes, trivia, or scores
+        // Check if rendering all costumes, trivia, or scores
         if (options.allCostumes) {
             let results = '';
             options.allCostumes.forEach(el => {
@@ -85,17 +85,92 @@ app.engine('file', (filepath, options, callback) => {
     });
 });
 
-
-
-
-// Body parser- form submission
-app.use(express.urlencoded({ extended: true}));
-app.use(bodyParser.json());
-
 // template engine
 app.set('view engine', 'file');
 app.set('views', './views');
 
+// Costume Routes
+app.get('/api/costumes', (req, res) => {
+    res.json(costumes);
+});
+
+app.post('/api/costumes', (req, res) => {
+    const newCostume = {
+        id: costumes.length + 1,
+        name: req.body.name,
+        type: req.body.type
+    };
+    costumes.push(newCostume);
+    res.status(201).json(newCostume);
+});
+
+app.patch('/api/costumes/:id', (req, res) => {
+    const costume = costumes.find(c => c.id == req.params.id);
+    if (costume) {
+        costume.name = req.body.name || costume.name;
+        costume.type = req.body.type || costume.type;
+        res.json(costume);
+    } else {
+        res.status(404).send('Costume not found');
+    }
+});
+
+app.delete('/api/costumes/:id', (req, res) => {
+    const index = costumes.findIndex(c => c.id == req.params.id);
+    if (index > -1) {
+        costumes.splice(index, 1);
+        res.sendStatus(204);
+    } else {
+        res.status(404).send('Costume not found');
+    }
+});
+
+// Trivia Routes
+app.get('/api/trivia', (req, res) => {
+    res.json(triviaQuestions);
+});
+
+app.post('/api/trivia', (req, res) => {
+    const newTrivia = {
+        id: triviaQuestions.length + 1,
+        question: req.body.question,
+        answer: req.body.answer,
+        difficulty: req.body.difficulty
+    };
+    triviaQuestions.push(newTrivia);
+    res.status(201).json(newTrivia);
+});
+
+app.delete('/api/trivia/:id', (req, res) => {
+    const index = triviaQuestions.findIndex(q => q.id == req.params.id);
+    if (index > -1) {
+        triviaQuestions.splice(index, 1);
+        res.sendStatus(204);
+    } else {
+        res.status(404).send('Trivia question not found');
+    }
+});
+
+// Score Routes
+app.get('/api/scores', (req, res) => {
+    res.json(scores);
+});
+
+app.post('/api/scores', (req, res) => {
+    const newScore = {
+        id: scores.length + 1,
+        playerName: req.body.playerName,
+        score: req.body.score
+    };
+    scores.push(newScore);
+    res.status(201).json(newScore);
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong! Please try again later.');
+});
 
 // Listener
 app.listen(PORT, () => {
