@@ -10,7 +10,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import fs from 'fs';
+import costumeRoutes from './routes/costumeRoutes.mjs';
+import triviaRoutes from './routes/triviaRoutes.mjs';
 
+// Use routes
+app.use('/api/costumes', costumeRoutes);
+app.use('/api/trivia', triviaRoutes);
 
 // Initialize Express
 const app = express();
