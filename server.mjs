@@ -11,11 +11,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import fs from 'fs';
 
+
 // Initialize Express
 const app = express();
 let PORT = 3000;
 
 
-
 // Middleware to serve static files
 app.use(express.static('./styles'));
+
+// Custom middleware to log requests
+
