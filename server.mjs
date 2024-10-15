@@ -21,4 +21,18 @@ let PORT = 3000;
 app.use(express.static('./styles'));
 
 // Custom middleware to log requests
+const logRequest = (req, res, next) => {
+    console.log(`$req.method} request for ${req.url}`);
+    next();
+};
+
+// Custom middleware to simulate a page when in maintenance mode (?)
+const maintenanceMode = (req, res, next) => {
+    const isInMaintenance = false; // set to true to enable maintenance mode
+    if (isInMaintenance) {
+        res.status(503).send('Sorry, the site is down for maintenance.');
+    } else {
+        next();
+    }
+};
 
