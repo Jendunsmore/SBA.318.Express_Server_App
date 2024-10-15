@@ -1,26 +1,29 @@
 // Import
+
+import { triviaQuestions } from '../data/data.mjs';
 import express from 'express';
 
 const router = express.Router();
 
-// Trivia Routes
+// GET all trivia questions
 router.get('/', (req, res) => {
+    console.log(`Received GET request to ${req.url}`);
     res.json(triviaQuestions);
 });
 
 // POST a new trivia question
-app.post('/api/trivia', (req, res) => {
+router.post('/api/trivia', (req, res) => {
     const newQuestion = {
         id: triviaQuestions.length + 1,
         question: req.body.question,
         answer: req.body.answer,
         difficulty: req.body.difficulty
     };
-    console.log(newQuestion)
     triviaQuestions.push(newQuestion);
     res.status(201).json(newQuestion);
 });
 
+// DELETE a trivia question
 router.delete('/:id', (req, res) => {
     const index = triviaQuestions.findIndex(q => q.id == req.params.id);
     if (index > -1) {
@@ -31,6 +34,7 @@ router.delete('/:id', (req, res) => {
     }
 });
 
+// Export
 export default router;
 
 
@@ -38,7 +42,7 @@ export default router;
 
 
 // POST a new trivia question
-app.post('/api/trivia', (req, res) => {
+router.post('/api/trivia', (req, res) => {
     const newQuestion = {
         id: triviaQuestions.length + 1,
         question: req.body.question,
@@ -51,7 +55,7 @@ app.post('/api/trivia', (req, res) => {
 });
 
 // DELETE a trivia question
-app.delete('/api/trivia/:id', (req, res) => {
+router.delete('/api/trivia/:id', (req, res) => {
     const triviaIndex = triviaQuestions.findIndex(q => q.id == req.params.id);
     if (triviaIndex > -1) {
         triviaQuestions.splice(triviaIndex, 1);
@@ -62,7 +66,7 @@ app.delete('/api/trivia/:id', (req, res) => {
 });
 
 // Error-handling middleware
-app.use((err, req, res, next) => {
+router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong! Please try again later.');
 });

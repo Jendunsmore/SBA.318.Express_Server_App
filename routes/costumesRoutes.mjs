@@ -1,6 +1,6 @@
 // Import
 import express from 'express';
-import { costumes } from '../data/costumes/mjs'; //Import costume data
+import { costumes } from '../data/data.mjs'; //Import costume data
 
 const router = express.Router();
 
@@ -83,4 +83,5 @@ router
         }
     });
 
+// Export
 export default router;

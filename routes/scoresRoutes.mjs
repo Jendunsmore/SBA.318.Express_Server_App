@@ -1,10 +1,12 @@
 // Import
-import express from 'express';
+import express, {Router} from 'express';
+import {scores} from '../data/data.mjs';
 
-const router = express.Router();
+const router = Router();
 
 // GET all scores
-app.get('/api/scores', (req, res) => {
+router.get('/api/scores', (req, res) => {
+    console.log(`Received GET request to ${req.url}`);
     res.json(scores);
 });
 
@@ -19,4 +21,21 @@ router.post('/', (req, res) => {
     res.status(201).json(newScore);
 });
 
+// PATCH a score by id
+router.patch('/:id', (req, res) => {
+    const score = scores.find((s, i) => {  // Find the score by id
+        if (s.id == req.params.id) {  // update score's properties, dynamically
+            for (const key in req.body) {
+                scores[i][key] = req.body[key];
+            }
+        }
+    });
+    if (score) {
+        res.json(score);
+    } else {
+        res.status(404).send('Score not found');
+    }
+});
+
+// Export
 export default router;
