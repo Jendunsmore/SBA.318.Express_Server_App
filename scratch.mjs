@@ -26,7 +26,7 @@
 // 15. Utilize reasonable code organization practices.
 // * I will go in and add CSS styles etc. (front end) work to app once back-end is up and working.
 // *** Just work on POST requests on forms - HTML does NOT support patch or delete
-
+// ** Do not show API
 
 //-------------------------------------
 // 1. create server.mjs file
@@ -36,3 +36,23 @@
 // 5. import express at top of page
 // 6. Initialize express into a variable
 // 7. Listen to express(app) at the BOTTOM of the page
+
+//---------------------------------------
+/*
+import express from 'express';
+import bodyParser from 'body-parser';
+import express from 'express';
+import bodyParser from 'body-parser';
+*/
+
+// Initialize Express:
+//  const app = express();
+//  let PORT = 3000;
+
+// routes
+// listener
+// middleware - custom
+// middleware - error handling
+// query params
+// form - view template, template engine
+// interactive form on render
