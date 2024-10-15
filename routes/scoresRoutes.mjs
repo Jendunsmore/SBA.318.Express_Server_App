@@ -12,28 +12,45 @@ router.get('/api/scores', (req, res) => {
 
 // POST a new score
 router.post('/', (req, res) => {
-    const newScore = {
-        id: scores.length + 1,
-        playerName: req.body.playerName,
-        score: req.body.score
-    };
-    scores.push(newScore);
-    res.status(201).json(newScore);
+    try {
+        if (!req.body.playerName || !req.body.score) {
+            res.status(400).send('Missing required fields');
+            return;
+        }
+
+        const newScore = {
+            id: scores.length + 1,
+            playerName: req.body.playerName,
+            score: req.body.score
+        };
+        scores.push(newScore);
+        res.status(201).json(newScore);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 // PATCH a score by id
 router.patch('/:id', (req, res) => {
-    const score = scores.find((s, i) => {  // Find the score by id
-        if (s.id == req.params.id) {  // update score's properties, dynamically
-            for (const key in req.body) {
-                scores[i][key] = req.body[key];
-            }
+    try {
+        const id = parseInt(req.params.id);
+        if (isNaN(id)) {
+            res.status(400).send('Invalid id');
+            return;
         }
-    });
-    if (score) {
+
+        const score = scores.find((s) => s.id === id);
+        if (!score) {
+            res.status(400).send('Score not found');
+            return;
+            }
+
+        Object.assign(score, req.body);
         res.json(score);
-    } else {
-        res.status(404).send('Score not found');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
     }
 });
 
