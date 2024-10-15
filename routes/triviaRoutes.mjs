@@ -33,3 +33,9 @@ app.delete('/api/trivia/:id', (req, res) => {
         res.status(404).send('Trivia question not found');
     }
 });
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong! Please try again later.');
+});
