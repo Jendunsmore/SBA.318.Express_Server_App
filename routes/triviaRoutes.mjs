@@ -1,14 +1,41 @@
-// GET all trivia questions
-app.get('/api/trivia', (req, res) => {
+// Import
+import express from 'express';
+
+const router = express.Router();
+
+// Trivia Routes
+router.get('/', (req, res) => {
     res.json(triviaQuestions);
 });
 
-// GET trivia by difficulty (query parameters)
-app.get('api/trivia/filter', (req, res) => {
-    const difficulty = req.query.difficulty;
-    const filteredQuestions = triviaQuestions.filter(q => q.difficulty === difficulty);
-    res.json(filteredQuestions);
+// POST a new trivia question
+app.post('/api/trivia', (req, res) => {
+    const newQuestion = {
+        id: triviaQuestions.length + 1,
+        question: req.body.question,
+        answer: req.body.answer,
+        difficulty: req.body.difficulty
+    };
+    console.log(newQuestion)
+    triviaQuestions.push(newQuestion);
+    res.status(201).json(newQuestion);
 });
+
+router.delete('/:id', (req, res) => {
+    const index = triviaQuestions.findIndex(q => q.id == req.params.id);
+    if (index > -1) {
+        triviaQuestions.splice(index, 1);
+        res.sendStatus(204);
+    } else {
+        res.status(404).send('Trivia question not found');
+    }
+});
+
+export default router;
+
+
+
+
 
 // POST a new trivia question
 app.post('/api/trivia', (req, res) => {
@@ -29,7 +56,7 @@ app.delete('/api/trivia/:id', (req, res) => {
     if (triviaIndex > -1) {
         triviaQuestions.splice(triviaIndex, 1);
         res.sendStatus(204);
-    }else {
+    } else {
         res.status(404).send('Trivia question not found');
     }
 });
