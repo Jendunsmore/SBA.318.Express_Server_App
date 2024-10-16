@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Show Costume</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a class="active" href="landing.html">Home</a></li>
+                <li><a href="index.html">Creations</a></li>
+                <li><a href="details.html">About</a></li>
+                <li style="float:right"><a href="details.html">Something Wicked This Way Comes...</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <h1>Show Costume</h1>
+            <form action="/api/costume" method="post"><br>
+                <input type='text' name='name' placeholder='Name...' /><br>
+                <input type='text' name='category' placeholder='Category...'  /><br>
+                <input type='number' name='description' placeholder='Description...'  /><br>
+                <input type='submit' />
+            </form>
+    </div>
+</html>

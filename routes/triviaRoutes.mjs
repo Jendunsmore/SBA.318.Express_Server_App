@@ -1,3 +1,5 @@
+/*
+
 // Import
 
 import { triviaQuestions } from '../data/data.mjs';
@@ -70,3 +72,5 @@ router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong! Please try again later.');
 });
+
+*/

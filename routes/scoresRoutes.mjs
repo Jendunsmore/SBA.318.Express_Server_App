@@ -1,3 +1,5 @@
+/*
+
 // Import
 import express, {Router} from 'express';
 import {scores} from '../data/data.mjs';
@@ -56,3 +58,5 @@ router.patch('/:id', (req, res) => {
 
 // Export
 export default router;
+
+*/
