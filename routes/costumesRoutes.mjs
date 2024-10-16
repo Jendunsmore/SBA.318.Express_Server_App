@@ -7,36 +7,36 @@ const router = express.Router();
 // Create / Read - GET all costumes
 // /api/costumes - POST (Add new costume) & GET (Get all costumes)
 
-// This is the POST route to add a new costume
-router.post('/', (req, res) => {
-    // Check if required data is provided
-    if (req.body.name && req.body.category && req.body.description) {
-        // If all required fields are provided, create a new costume object
-        let newCostume = {
-            id: costumes.length + 1,  // Generate a new ID based on array length
-            name: req.body.name,
-            category: req.body.category,
-            description: req.body.description
+router
+    .route('/')
+    .post((req, res) => {  // This is the POST route to add a new costume
+        // Check if required data is provided
+        if (req.body.name && req.body.category && req.body.description) {
+            // If all required fields are provided, create a new costume object
+            let newCostume = {
+                id: costumes.length + 1,  // Generate a new ID based on array length
+                name: req.body.name,
+                category: req.body.category,
+                description: req.body.description
+            };
+            // Add the new costume to the array
+            costumes.push(newCostume);
+            // Render a view to show the new costume
+            res.render('showCostume', newCostume);
+        } else {
+            // If any of the required fields are missing, send an error message
+            res.send(`Incorrect Info, all fields are required (name, category, description).`);
+        }
+    })
+    .get((req, res) => {  // This is the GET route to show all costumes
+        // Pass all costumes to the view
+        let options = {
+            allCostumes: costumes,
         };
-        // Add the new costume to the array
-        costumes.push(newCostume);
-        // Render a view to show the new costume
-        res.render('showCostume', newCostume);
-    } else {
-        // If any of the required fields are missing, send an error message
-        res.send(`Incorrect Info, all fields are required (name, category, description).`);
-    }
-});
+        // Render a view to display all costumes
+        res.render('showAllCostumes', options);
+    });
 
-// This is the GET route to show all costumes
-router.get('/', (req, res) => {
-    // Pass all costumes to the view
-    let options = {
-        allCostumes: costumes,
-    };
-    // Render a view to display all costumes
-    res.render('showAllCostumes', options);
-});
 
 // New Costume Form
 router.get('/new', (req, res) => {
@@ -46,13 +46,11 @@ router.get('/new', (req, res) => {
 // Update / Delete / Show Costume by ID
 router
     .route('/:id')
-    // This is the PATCH route to update a costume
     .patch((req, res) => {
         const costume = costumes.find((c, i) => {
             if (c.id == req.params.id) {
                 // Update the costume properties
                 for (const key in req.body) {
-                    costumes[i][key] = req.body[key];
                     costumes[i][key] = req.body[key];  // Dynamically update based on submitted body
                 }
                 return true;
@@ -60,13 +58,11 @@ router
         });
 
         if (costume) {
-            res.json(costume);
             res.json(costume);  // Respond with the updated costume data
         } else {
             res.send('Incorrect ID');
         }
     })
-    // This is the DELETE route to delete a costume
     .delete((req, res) => {
         const costumeIndex = costumes.findIndex((c) => c.id == req.params.id);
         if (costumeIndex !== -1) {
@@ -76,18 +72,17 @@ router
             res.send('Incorrect ID');
         }
     })
-    // This is the GET route to show a costume by ID
     .get((req, res) => {
         const costume = costumes.find((c) => c.id == req.params.id);
 
         if (costume) {
-            const options = {
+            let options = {
                 id: costume.id,
                 name: costume.name,
                 category: costume.category,
                 description: costume.description,
             };
-            res.render('showCostume', options); // Render a view to display the costume details
+            res.render('showCostume', options);  // Render a view to display the costume details
         } else {
             res.send('Incorrect ID');
         }
