@@ -67,19 +67,6 @@ app.engine('file', (filePath, options, callback) => {
             });
         */
 
-        /*
-        } else if (options.allTrivia) {
-            options.allTrivia.forEach(el => {
-                result += `<h2>Question: ${el.question}</h2><h3>Answer: ${el.answer}</h3><br>`;
-            });
-
-        } else if (options.allScores) {
-            options.allScores.forEach(el => {
-                result += `<h2>Player: ${el.playerName}</h2><h3>Score: ${el.score}</h3><br>`;
-            });
-        */
-
-
         const rendered = content
             .toString()
             .replace('#content#', result)

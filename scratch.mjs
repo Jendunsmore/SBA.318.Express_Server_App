@@ -562,3 +562,143 @@ body {
 //---------------------------------
 
 
+//.................................................................//
+//.......................Stretch Goals Code......................//
+
+/* --- scoresRoutes.mjs-----
+
+// Import
+import express, {Router} from 'express';
+import {scores} from '../data/data.mjs';
+
+const router = Router();
+
+// GET all scores
+router.get('/api/scores', (req, res) => {
+    console.log(`Received GET request to ${req.url}`);
+    res.json(scores);
+});
+
+// POST a new score
+router.post('/', (req, res) => {
+    try {
+        if (!req.body.playerName || !req.body.score) {
+            res.status(400).send('Missing required fields');
+            return;
+        }
+
+        const newScore = {
+            id: scores.length + 1,
+            playerName: req.body.playerName,
+            score: req.body.score
+        };
+        scores.push(newScore);
+        res.status(201).json(newScore);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// PATCH a score by id
+router.patch('/:id', (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        if (isNaN(id)) {
+            res.status(400).send('Invalid id');
+            return;
+        }
+
+        const score = scores.find((s) => s.id === id);
+        if (!score) {
+            res.status(400).send('Score not found');
+            return;
+            }
+
+        Object.assign(score, req.body);
+        res.json(score);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Export
+export default router;
+*/
+//--------------------------------------------
+
+
+/*--- triviaRoutes.mjs-------------------------
+
+// Import
+
+import { triviaQuestions } from '../data/data.mjs';
+import express from 'express';
+
+const router = express.Router();
+
+// GET all trivia questions
+router.get('/', (req, res) => {
+    console.log(`Received GET request to ${req.url}`);
+    res.json(triviaQuestions);
+});
+
+// POST a new trivia question
+router.post('/api/trivia', (req, res) => {
+    const newQuestion = {
+        id: triviaQuestions.length + 1,
+        question: req.body.question,
+        answer: req.body.answer,
+        difficulty: req.body.difficulty
+    };
+    triviaQuestions.push(newQuestion);
+    res.status(201).json(newQuestion);
+});
+
+// DELETE a trivia question
+router.delete('/:id', (req, res) => {
+    const index = triviaQuestions.findIndex(q => q.id == req.params.id);
+    if (index > -1) {
+        triviaQuestions.splice(index, 1);
+        res.sendStatus(204);
+    } else {
+        res.status(404).send('Trivia question not found');
+    }
+});
+
+// Export
+export default router;
+
+
+// POST a new trivia question
+router.post('/api/trivia', (req, res) => {
+    const newQuestion = {
+        id: triviaQuestions.length + 1,
+        question: req.body.question,
+        answer: req.body.answer,
+        difficulty: req.body.difficulty
+    };
+    console.log(newQuestion)
+    triviaQuestions.push(newQuestion);
+    res.status(201).json(newQuestion);
+});
+
+// DELETE a trivia question
+router.delete('/api/trivia/:id', (req, res) => {
+    const triviaIndex = triviaQuestions.findIndex(q => q.id == req.params.id);
+    if (triviaIndex > -1) {
+        triviaQuestions.splice(triviaIndex, 1);
+        res.sendStatus(204);
+    } else {
+        res.status(404).send('Trivia question not found');
+    }
+});
+
+// Error-handling middleware
+router.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong! Please try again later.');
+});
+
+*/
