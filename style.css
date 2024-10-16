@@ -1,0 +1,77 @@
+@import url(https://fonts.googleapis.com/css?family=Griffy:regular);
+
+body {
+    background-color: #0e0d0d;
+    opacity: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+    /* ----------------------------------- */
+    /* -------------Nav Bar--------------- */
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li {
+        float: left;
+        border-right: 2px solid #b8d14b;
+    }
+
+    li:last-child {
+        border-right: none;
+    }
+
+    li a {
+        display: block;
+        color: #ff9b3e;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #75108b;
+    }
+
+    .active {
+        text-decoration-color: #75108b;
+    }
+
+    a {
+        color: #fdf7f7;
+        text-decoration: none
+    }
+
+    a:hover {
+        color: hwb(303 51% 12%);
+    }
+
+    nav {
+        background-color: #ffa500;
+        border-bottom: 5px solid rgb(171, 26, 161);
+        padding: 16px;
+        padding-left: 15px;
+    }
+
+    nav a {
+        color: 0a0a09f7;
+    }
+
+    nav a:hover {
+        color: yellow;
+    }
+
+    /*------------- Nav Bar -------------*/
+
+    h1 {
+        text-align: center;
+        color: #e30cd4;
+        font-family: 'Griffy', cursive;
+        font-size: 50px;
+        font-weight: 100;
+    }
