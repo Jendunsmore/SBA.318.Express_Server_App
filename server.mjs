@@ -52,21 +52,33 @@ app.engine('file', (filePath, options, callback) => {
     fs.readFile(filePath, (err, content) => {
         if (err) return callback(err);
 
-        let result = '';
-        // Logic for rendering views based on options passed in (e.g., allCostumes, allTrivia, etc.)
         if (options.allCostumes) {
-            options.allCostumes.forEach(el => {
+            let result = '';
+
+            options.allCostumes.forEach((el) => {
+                result +=`<h2>Costume: ${el.name}</h2><h3>Type: ${el.type}</h3><br>`;
+    });
+
+        /*
+            let result = '';
+        if (options.allCostumes) {
+            options.allCostumes.forEach((el) => {
                 result += `<h2>Costume: ${el.name}</h2><h3>Type: ${el.type}</h3><br>`;
             });
+        */
+
+        /*
         } else if (options.allTrivia) {
             options.allTrivia.forEach(el => {
                 result += `<h2>Question: ${el.question}</h2><h3>Answer: ${el.answer}</h3><br>`;
             });
+
         } else if (options.allScores) {
             options.allScores.forEach(el => {
                 result += `<h2>Player: ${el.playerName}</h2><h3>Score: ${el.score}</h3><br>`;
             });
-        }
+        */
+
 
         const rendered = content
             .toString()
@@ -79,12 +91,13 @@ app.engine('file', (filePath, options, callback) => {
             .replace('#score#', `${options.score || 'N/A'}`);
 
         return callback(null, rendered);
+        }
     });
 });
 
 // Template engine
-app.set('view engine', 'ejs');
 app.set('views', './views');
+app.set('view engine', 'ejs');
 
 // Use routes
 app.use('/api/costumes', costumesRoutes);
