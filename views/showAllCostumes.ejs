@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Show Costume</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a class="active" href="landing.html">Home</a></li>
+                <li><a href="index.html">Creations</a></li>
+                <li><a href="details.html">About</a></li>
+                <li style="float:right"><a href="details.html">Something Wicked This Way Comes...</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <h1>All Costumes</h1>
+            <% if (allCostumes && allCostumes.length > 0) { %>
+                <% allCostumes.forEach(costume => { %>
+                    <div>
+                        <h2>Name: <%= costume.name %></h2>
+                        <p>Type: <%= costume.type %></p>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No costumes available.</p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

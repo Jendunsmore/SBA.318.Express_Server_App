@@ -11,8 +11,10 @@ import bodyParser from 'body-parser';
 import fs from 'fs';
 import express from 'express';
 import costumesRoutes from './routes/costumesRoutes.mjs';
-import scoresRoutes from './routes/scoresRoutes.mjs';
-import triviaRoutes from './routes/triviaRoutes.mjs';
+
+//import scoresRoutes from './routes/scoresRoutes.mjs';
+//import triviaRoutes from './routes/triviaRoutes.mjs';
+
 
 // Initialize Express
 const app = express();
@@ -86,8 +88,8 @@ app.set('views', './views');
 
 // Use routes
 app.use('/api/costumes', costumesRoutes);
-app.use('/api/scores', scoresRoutes); // Added the scores route
-app.use('/api/trivia', triviaRoutes);
+//app.use('/api/scores', scoresRoutes); // Added the scores route
+//app.use('/api/trivia', triviaRoutes);
 
 // 404 Error handling middleware
 app.use((req, res) => {
