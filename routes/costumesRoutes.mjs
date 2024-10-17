@@ -4,9 +4,8 @@ import { costumes } from '../data/data.mjs'; //Import costume data
 
 const router = express.Router();
 
-// Create / Read - GET all costumes
-// /api/costumes - POST (Add new costume) & GET (Get all costumes)
-
+//------ Create / Read - GET all costumes
+//------ /api/costumes - POST (Add new costume) & GET (Get all costumes)
 router
     .route('/')
     .post((req, res) => {  // This is the POST route to add a new costume
@@ -14,13 +13,12 @@ router
         if (req.body.name && req.body.category && req.body.description) {
             // If all required fields are provided, create a new costume object
             let newCostume = {
-                id: costumes.length + 1,  // Generate a new ID based on array length
+                id: costumes.length + 1, // Generate a new ID based on array length
                 name: req.body.name,
                 category: req.body.category,
                 description: req.body.description
             };
-            // Add the new costume to the array
-            costumes.push(newCostume);
+            costumes.push(newCostume);  // Add the new costume to the array
             // Render a view to show the new costume
             res.render('showCostume', newCostume);
         } else {
@@ -34,16 +32,16 @@ router
             allCostumes: costumes,
         };
         // Render a view to display all costumes
-        res.render('showAllCostumes', options);
+        res.render('showAllCostumes.ejs', options);
     });
 
 
-// New Costume Form
+//-------- New Costume Form
 router.get('/new', (req, res) => {
     res.render('newCostume');  // Render a form to create a new costume
 });
 
-// Update / Delete / Show Costume by ID
+//---- Update / Delete / Show Costume by ID
 router
     .route('/:id')
     .patch((req, res) => {

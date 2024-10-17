@@ -48,7 +48,7 @@ app.use(logRequest);
 app.use(maintenanceMode);
 
 // View engine configuration
-app.engine('file', (filePath, options, callback) => {
+app.engine('ejs', (filePath, options, callback) => {
     fs.readFile(filePath, (err, content) => {
         if (err) return callback(err);
 
@@ -56,7 +56,7 @@ app.engine('file', (filePath, options, callback) => {
             let result = '';
 
             options.allCostumes.forEach((el) => {
-                result +=`<h2>Costume: ${el.name}</h2><h3>Type: ${el.type}</h3><br>`;
+                result +=`<h2>Costume: ${el.name}</h2><h3>Category: ${el.category}</h3><h3>Description: ${el.description}<br>`;
     });
 
         /*
@@ -71,12 +71,8 @@ app.engine('file', (filePath, options, callback) => {
             .toString()
             .replace('#content#', result)
             .replace('#name#', `${options.name || 'N/A'}`)
-            .replace('#type#', `${options.type || 'N/A'}`)
-            .replace('#question#', `${options.question || 'N/A'}`)
-            .replace('#answer#', `${options.answer || 'N/A'}`)
-            .replace('#playerName#', `${options.playerName || 'N/A'}`)
-            .replace('#score#', `${options.score || 'N/A'}`);
-
+            .replace('#category#', `${options.category || 'N/A'}`)
+            .replace('#description#', `${options.description || 'N/A'}`)
         return callback(null, rendered);
         }
     });
@@ -88,6 +84,7 @@ app.set('view engine', 'ejs');
 
 // Use routes
 app.use('/api/costumes', costumesRoutes);
+
 //app.use('/api/scores', scoresRoutes); // Added the scores route
 //app.use('/api/trivia', triviaRoutes);
 

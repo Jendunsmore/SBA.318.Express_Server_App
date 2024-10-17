@@ -1,11 +1,11 @@
 // Database with costumes, triviaQuestions, scores
 
 export const costumes = [
-    {id: 1, name: 'Vampire', type: 'Classic'},
-    {id: 2, name: 'Zombie', type: 'Horror'},
-    {id: 3, name: 'Witch', type: 'Classic'},
-    {id: 4, name: 'Werewolf', type: 'Horror'},
-    {id: 5, name: 'Pumpkin King', type: 'Movie'},
+    {id: 1, name: 'Vampire', category: 'Classic'},
+    {id: 2, name: 'Zombie', category: 'Horror'},
+    {id: 3, name: 'Witch', category: 'Classic'},
+    {id: 4, name: 'Werewolf', category: 'Horror'},
+    {id: 5, name: 'Pumpkin King', category: 'Movie'},
 ];
 
 
