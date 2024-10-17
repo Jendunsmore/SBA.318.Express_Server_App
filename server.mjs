@@ -21,10 +21,14 @@ const app = express();
 const PORT = 3000;
 
 // Middleware to serve static files (e.g., CSS)
-app.use(express.static('./styles'));
+// This line tells Express to serve static files from the './styles' folder
+// for any URLs that start with '/styles'. So, for example, if a client
+// requests '/styles/style.css', Express will serve the file at
+// './styles/style.css' without needing to write a special route for it.
+app.use(express.static('styles'));
 
 // Middleware to parse incoming JSON and form data
-app.use(express.json());
+app.use(bodyParser.json({extended:true}));
 app.use(express.urlencoded({ extended: true }));
 
 // Custom middleware to log requests
@@ -66,13 +70,15 @@ app.engine('ejs', (filePath, options, callback) => {
                 result += `<h2>Costume: ${el.name}</h2><h3>Type: ${el.type}</h3><br>`;
             });
         */
-
+        const rendered = content.toString().replace('#content#', result);
+        return callback(null, rendered);
+    } else {
         const rendered = content
             .toString()
-            .replace('#content#', result)
-            .replace('#name#', `${options.name || 'N/A'}`)
-            .replace('#category#', `${options.category || 'N/A'}`)
-            .replace('#description#', `${options.description || 'N/A'}`)
+            .replaceAll('#name#', `${options.name}`)
+            .replace('#category#', `${options.category}`)
+            .replace('#description#', `${options.description}`)
+            .replace('#id#', options.id);
         return callback(null, rendered);
         }
     });
@@ -85,19 +91,6 @@ app.set('view engine', 'ejs');
 // Use routes
 app.use('/api/costumes', costumesRoutes);
 
-//app.use('/api/scores', scoresRoutes); // Added the scores route
-//app.use('/api/trivia', triviaRoutes);
-
-// 404 Error handling middleware
-app.use((req, res) => {
-    res.status(404).send("Resource not found");
-});
-
-// Error-handling middleware for server issues
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong! Please try again later.');
-});
 
 // Listener
 app.listen(PORT, () => {

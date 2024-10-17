@@ -1,11 +1,11 @@
 // Database with costumes, triviaQuestions, scores
 
 export const costumes = [
-    {id: 1, name: 'Vampire', category: 'Classic'},
-    {id: 2, name: 'Zombie', category: 'Horror'},
-    {id: 3, name: 'Witch', category: 'Classic'},
-    {id: 4, name: 'Werewolf', category: 'Horror'},
-    {id: 5, name: 'Pumpkin King', category: 'Movie'},
+    {id: 1, name: 'Vampire', category: 'Classic', description: "consists of capes and fake fangs, mostly plastic. Clothing is generally black and either red or any other dark colors. They were often based on formal wear from the 1800s."},
+    {id: 2, name: 'Zombie', category: 'Horror', description: "a scary costume for both male and female. It consists with fake blood, grey or green face paint, and ripped clothing."},
+    {id: 3, name: 'Witch', category: 'Classic', description: "a traditional costume that consists a black dress, black cape, black pointy witch hat, striped stockings, and black elf-like shoes"},
+    {id: 4, name: 'Werewolf', category: 'Horror', description: "Like a dog or wolf costume, it requires a hairy pelt covering most of the visible skin."},
+    {id: 5, name: 'Pumpkin King', category: 'Movie', description: "a skeleton dressed in a black pin-striped suit and a bow tie that strongly resembles a bat."},
 ];
 
 

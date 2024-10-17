@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Show Costume</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css" />
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a class="active" href="landing.html">Home</a></li>
-                <li><a href="index.html">Creations</a></li>
-                <li><a href="details.html">About</a></li>
-                <li style="float:right"><a href="details.html">Something Wicked This Way Comes...</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <head>
+        <title>Show Costume</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a class="active" href="landing.html">Home</a></li>
+                    <li><a href="index.html">Creations</a></li>
+                    <li><a href="details.html">About</a></li>
+                    <li style="float:right"><a href="details.html">Something Wicked This Way Comes...</a></li>
+                </ul>
+            </nav>
+        </header>
+
+            <h1 style="display: flex; justify-content: center; align-items: center; height: 30vh;">Show Your Costume</h1>
+
+            <div style="display: flex; justify-content: center; align-items: center; height: 30vh;">
+                <form action="/api/costume" method="POST" style="width: 50%; text-align: center;">
+            <!-- Name input field -->
+                <input type="text" name="name" placeholder="Name..."
+                    style="width: 80%; background-color: orange; margin-bottom: 10px;" /><br>
+
+            <!-- Category input field -->
+                <input type="text" name="category" placeholder="Category..."
+                    style="width: 80%; background-color: orange; margin-bottom: 10px;" /><br>
+
+            <!-- Description textarea -->
+                <textarea name="description" placeholder="Description..."
+                    style="width: 80%; height: 100px; background-color: orange; margin-bottom: 10px;"></textarea><br>
+
+            <!-- Submit button -->
+                <input type="submit"
+                    style="width: 80%; background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer;">
+            </form>
+        </div>
+
+    </body>
+</html>
+
+
+
+    <!----
     <div>
         <h1>Show Costume</h1>
             <div style="display: flex; justify-content: center; align-items: center; height: 30vh;">
@@ -28,4 +59,4 @@
         <input type='submit' style="width: 80%; background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer;">
     </form>
 </html>
-
+-->
