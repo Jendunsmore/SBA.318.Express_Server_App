@@ -35,12 +35,15 @@ router
         res.render('showAllCostumes.ejs', options);
     });
 
+/*************  ✨ Codeium Command 🌟  *************/
 
 //-------- New Costume Form
 router.get('/new', (req, res) => {
+    res.render('newCostume');  // This route handles the GET request to '/new' endpoint, rendering a form to create a new costume
     res.render('newCostume');  // Render a form to create a new costume
 });
 
+/******  b06a7cd1-2699-45a4-9b2d-12f8ed52c16b  *******/
 //---- Update / Delete / Show Costume by ID
 router
     .route('/:id')

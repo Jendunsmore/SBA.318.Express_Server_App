@@ -52,34 +52,41 @@ app.use(logRequest);
 app.use(maintenanceMode);
 
 // View engine configuration
+// This function will be called by Express to render a view
+// filePath is the path to the template file
+// options is an object containing any variables we want to pass to the template
+// callback is a function to call when we're done rendering the view
 app.engine('ejs', (filePath, options, callback) => {
+    // Read the template file
     fs.readFile(filePath, (err, content) => {
-        if (err) return callback(err);
+        if (err) return callback(err); // If there's an error, pass it to the callback
 
+        // If we're rendering a page that shows all costumes
         if (options.allCostumes) {
-            let result = '';
+            let result = ''; // Initialize an empty string
 
+            // Loop over all costumes and create a string of HTML for each one
             options.allCostumes.forEach((el) => {
-                result +=`<h2>Costume: ${el.name}</h2><h3>Category: ${el.category}</h3><h3>Description: ${el.description}<br>`;
-    });
-
-        /*
-            let result = '';
-        if (options.allCostumes) {
-            options.allCostumes.forEach((el) => {
-                result += `<h2>Costume: ${el.name}</h2><h3>Type: ${el.type}</h3><br>`;
+                result += `
+                    <h2>Costume: ${el.name}</h2>
+                    <h3>Category: ${el.category}</h3>
+                    <h3>Description: ${el.description}<br>
+                `;
             });
-        */
-        const rendered = content.toString().replace('#content#', result);
-        return callback(null, rendered);
-    } else {
-        const rendered = content
-            .toString()
-            .replaceAll('#name#', `${options.name}`)
-            .replace('#category#', `${options.category}`)
-            .replace('#description#', `${options.description}`)
-            .replace('#id#', options.id);
-        return callback(null, rendered);
+
+            // Replace the '#content#' placeholder in the template with our HTML string
+            const rendered = content.toString().replace('#content#', result);
+            return callback(null, rendered); // Pass the rendered HTML to the callback
+        } else {
+            // If we're not rendering a list of all costumes, replace placeholders in the template
+            // with values from the options object
+            const rendered = content
+                .toString()
+                .replaceAll('#name#', `${options.name}`)
+                .replace('#category#', `${options.category}`)
+                .replace('#description#', `${options.description}`)
+                .replace('#id#', options.id);
+            return callback(null, rendered); // Pass the rendered HTML to the callback
         }
     });
 });
